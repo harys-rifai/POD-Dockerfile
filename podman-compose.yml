@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  laravel:
+    build: .
+    container_name: nextwave
+    working_dir: /var/www/html/nextwave
+    command: php artisan serve --host=0.0.0.0 --port=808
+    ports:
+      - "808:808"
+    volumes:
+      - ./nextwave:/var/www/html/nextwave
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      nextwave-net:
+        ipv4_address: 10.10.0.8
+
+  postgres:
+    image: postgres:18
+    container_name: my-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Password09
+      POSTGRES_DB: nextwave_db
+    ports:
+      - "5432:5432"
+    networks:
+      nextwave-net:
+        ipv4_address: 10.10.0.6
+
+  redis:
+    image: redis:7
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+    networks:
+      nextwave-net:
+        ipv4_address: 10.10.0.7
+
+networks:
+  nextwave-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
