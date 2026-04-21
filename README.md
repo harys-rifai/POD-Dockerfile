@@ -4,10 +4,14 @@ This repository contains the Dockerfile, **podman-compose.yml**, and supporting 
 
 ## Files
 
-- **Dockerfile** – Builds the POD image with necessary runtime dependencies.
+- **Dockerfile** – Multi-stage Dockerfile for building the POD PHP application image with PHP 8.3-FPM, Alpine Linux, and optimized production setup.
 - **podman-compose.yml** – Defines services for a multi‑container setup using Podman (compatible with Docker Compose).
 - **step.md** – Step‑by‑step guide for initial configuration and deployment.
 - **README.md** – This file.
+
+## Recent Changes
+
+- Added multi-stage Dockerfile for PHP 8.3-FPM with Alpine, including builder and production stages for optimized image size and security.
 
 ## Quick Start
 
